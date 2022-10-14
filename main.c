@@ -98,6 +98,7 @@ int func(int keypress, void *arg) {
 	else if (keypress == 53)
 		exit(1);
 	makeRay(data);
+	printf("x: %f, y: %f\n", data->x1, data->y1);
 	return (0);
 }
 
@@ -106,9 +107,9 @@ int main() {
 
 
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 750, 750, "377266");
+	data.mlx_win = mlx_new_window(data.mlx_ptr, 1000, 1000, "377266");
 
- 	data.new_img = mlx_new_image(data.mlx_ptr, 300, 300);
+ 	data.new_img = mlx_new_image(data.mlx_ptr, 800, 800);
 
 	int bits_per_pixel;
 	int size_line;
@@ -125,10 +126,10 @@ int main() {
 		while (++j < 10) {
 			if (map[i][j] == '1') {
 				y = 0;
-				while (y <= 28) {
+				while (y <= 68) {
 					x = 0;
-					while (x <= 28) {
-						data.new_img_data[(i * 300 * 30) + (j * 30) + (x + (y * 300))] = 5353205;
+					while (x <= 68) {
+						data.new_img_data[(i * 800 * 70) + (j * 70) + (x + (y * 800))] = 5353205;
 						x++;
 					}
 					y++;
@@ -141,6 +142,8 @@ int main() {
 	data.angle = 0;
 	data.x1 = 100;
 	data.y1 = 100;
+
+	float asd = 10.54f;
 
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.new_img, 0, 0);
 	mlx_hook(data.mlx_win, 2, 0, func, (void *)&data);
