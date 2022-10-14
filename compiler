@@ -1,0 +1,1 @@
+gcc raycasting_example.c libmlx_macos.a -framework OpenGL -framework AppKit
