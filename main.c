@@ -16,6 +16,8 @@ typedef struct s_data
 	double val;
 	double x1;
 	double y1;
+	double tanAnglePoz;
+	double tanAngleNeg;
 }	t_data;
 
 
@@ -42,7 +44,7 @@ void makeRay(t_data *data) {
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->new_img, 0, 0);
 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1, data->y1, 0xff0000);
 	i = 0;
-	while (++i < 100) {
+	while (++i < 500) {
 		x2 = data->x1 + (i * cos(data->val * (data->angle - 60)));
 		tmp = x2 - (int)x2;
 		if (tmp > (double)0.5)
@@ -54,7 +56,7 @@ void makeRay(t_data *data) {
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
 	i = 0;
-	while (++i < 100) {
+	while (++i < 500) {
 		x2 = data->x1 + (i * cos(data->val * (data->angle + 60)));
 		y2 = data->y1 + (i * sin(data->val * (data->angle + 60)));
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
@@ -65,6 +67,27 @@ void makeRay(t_data *data) {
 		y2 = data->y1 + (i * sin(data->val * (data->angle)));
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
+
+	i = 0;
+	int k = 0, j = 10;
+	while (j--)
+	{
+		i = -1;
+		while (i++ < data->tanAnglePoz)
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*tan(data->val * i), data->y1 - k - ((int)data->y1) % 70, 0x00ff00);
+		k += 70;
+	}
+	i,j = 10;
+	k = 0;
+	while (j--)
+	{
+		i = 0;
+		while (i++ < data->tanAngleNeg)
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i)), data->y1 - k - ((int)data->y1) % 70, 0x00ff00);
+		k += 70;
+	}
+	// printf("x1: %f, y1: %f, xa1: %f, xb1: %f\n", data->x1, data->y1, tan(data->val * data->angle)*data->x1, tan(data->val * data->angle)*data->y1);
+
 }
 
 int func(int keypress, void *arg) {
@@ -75,10 +98,17 @@ int func(int keypress, void *arg) {
 
 	mlx_clear_window(data->mlx_ptr, data->mlx_win);
 
-	if (keypress == 123)
+	if (keypress == 123) {
+		data->tanAnglePoz -= 5;
+		data->tanAngleNeg += 5;
 		data->angle -= 5;
+	}
 	else if (keypress == 124)
+	{
+		data->tanAnglePoz += 5;
+		data->tanAngleNeg -= 5;
 		data->angle += 5;
+	}
 	else if (keypress == 13) {
 		data->y1 = data->y1 + (5 * sin(data->angle * data->val));
 		data->x1 = data->x1 + (5 * cos(data->angle * data->val));
@@ -97,8 +127,17 @@ int func(int keypress, void *arg) {
 	}
 	else if (keypress == 53)
 		exit(1);
+	if (data->angle <= -360 || data->angle >= 360) {
+		data->angle = 0;
+	}
+	if ( data->tanAngleNeg == 360 || data->tanAngleNeg == -360)
+	{
+	data->tanAngleNeg = 0;
+	}	
+		
+	if ( data->tanAnglePoz == 360 || data->tanAnglePoz == -360)
+		data->tanAnglePoz = 0;
 	makeRay(data);
-	printf("x: %f, y: %f\n", data->x1, data->y1);
 	return (0);
 }
 
@@ -135,13 +174,19 @@ int main() {
 					y++;
 				}
 			}
+			else {
+				for (int ks = 0; ks < 70; ks++)
+					data.new_img_data[(i * 800 * 70) + (j * 70) + (x + (y * 799)) + ks] = 0xff8000;
+			}
 		}
 	}
 	double angle, val, x1, x2, y1, y2;
 	data.val = PI / 180;
-	data.angle = 0;
-	data.x1 = 100;
-	data.y1 = 100;
+	data.angle = 270;
+	data.x1 =  210.187407;
+	data.y1 = 309.354930;
+	data.tanAnglePoz = 60;
+	data.tanAngleNeg = 60;
 
 	float asd = 10.54f;
 
@@ -149,11 +194,4 @@ int main() {
 	mlx_hook(data.mlx_win, 2, 0, func, (void *)&data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
-
-	// data.mlx_ptr = mlx_init();
-	// data.mlx_win = mlx_new_window(data.mlx_ptr, 480, 480, "Hello");
-
-	
-	// mlx_key_hook(data.mlx_win, func, (void *)&data);
-	// mlx_loop(data.mlx_ptr);
 }
