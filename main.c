@@ -79,8 +79,8 @@ void makeRay(t_data *data) {
 	int k = 0, j = 10;
 	while (j--)
 	{
-		i = -1;
-		while (i++ < data->tanAnglePoz && i < 90) {
+		i = data->firstAngle[0];
+		while (i++ < data->firstAngle[1] && i < 90) {
 			checkPozX = data->x1 + (((int)data->y1 % 70) + k)*tan(data->val * i);
 			checkPozY = data->y1 - k - ((int)data->y1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
@@ -88,7 +88,7 @@ void makeRay(t_data *data) {
 		}
 		k += 70;
 	}
-	j = 10;
+/* 	j = 10;
 	k = 0;
 	while (j--)
 	{
@@ -116,17 +116,16 @@ void makeRay(t_data *data) {
 		}
 
 		k += 70;
-	}
+	} */
 	j = 10;
 	k = 0;
 	while (j--)
 	{
-		i = -1;
-		while (i++ < data->tanAnglePoz && i < 90) {
+		i = data->firstAngle[0];
+		while (i++ < data->firstAngle[1] && i < 90) {
 			checkPozY = data->y1 + (70 - ((int)data->x1 % 70) + k)*1/(-tan(data->val * (i)));
 			checkPozX = data->x1 + k + 70 - ((int)data->x1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630)) {
-				printf("%d, %d\n", checkPozX, checkPozY);
 				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
 			}
 		}
@@ -145,7 +144,7 @@ void makeRay(t_data *data) {
 		k += 70;
 	} */
 
-	/* if ( (data->tanAngleNeg == -240) && (data->tanAnglePoz == 0))
+/* 	if ( (data->tanAngleNeg == -240) && (data->tanAnglePoz == 0))
 	{
 		data->tanAnglePoz = 120;
 		data->tanAngleNeg = 0;
@@ -214,54 +213,61 @@ int func(int keypress, void *arg) {
 	}
 	else if (keypress == 53)
 		exit(1);
-	if (data->angle <= -360 || data->angle >= 360) {
-		data->angle = 0;
+	if (data->angle == 360 || data->angle == 1080) {
+		data->angle = 720;
 	}
 
-	// if (!(data->angle >= 60 && data->angle <= 210)) {
-	// 	if () {
+	double checkAngle = abs((int)data->angle % 360);
+	printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
+	if (!(checkAngle > 60 && checkAngle < 210)) {
+		if (checkAngle >= 210 && checkAngle < 330) {
+			data->firstAngle[0] = 0;
+			data->firstAngle[1] = fabs(210 - checkAngle);
+			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
+		}
+		else if (checkAngle >= 330) {
+			data->firstAngle[0] = fabs(330 - checkAngle);
+			data->firstAngle[1] = 90;
+			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
+		}
+		else if (checkAngle <= 60) {
+			data->firstAngle[0] = fabs(30 + checkAngle);
+			data->firstAngle[1] = 90;
+		}
+	}
+/* 	if (!(data->angle >= 330 && data->angle <= 120)) {
+		if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// }
-	// if (!(data->angle >= 330 && data->angle <= 120)) {
-	// 	if () {
+		}
+	}
+	if (!(data->angle >= 240 && data->angle <= 30)) {
+		if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// }
-	// if (!(data->angle >= 240 && data->angle <= 30)) {
-	// 	if () {
+		}
+	}
+	if (!(data->angle >= 150 && data->angle <= 300)) {
+		if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// 	else if () {
+		}
+		else if () {
 
-	// 	}
-	// }
-	// if (!(data->angle >= 150 && data->angle <= 300)) {
-	// 	if () {
-
-	// 	}
-	// 	else if () {
-
-	// 	}
-	// 	else if () {
-
-	// 	}
-	// }
+		}
+	} */
 	
 	makeRay(data);
 	return (0);
