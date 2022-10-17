@@ -18,6 +18,10 @@ typedef struct s_data
 	double y1;
 	double tanAnglePoz;
 	double tanAngleNeg;
+	double firstAngle[2];
+	double secAngle[2];
+	double thirdAngle[2];
+	double fourthAngle[2];
 }	t_data;
 
 
@@ -68,13 +72,94 @@ void makeRay(t_data *data) {
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
 
+	int checkPozX;
+	int checkPozY;
+
 	i = 0;
 	int k = 0, j = 10;
 	while (j--)
 	{
 		i = -1;
+		while (i++ < data->tanAnglePoz && i < 90) {
+			checkPozX = data->x1 + (((int)data->y1 % 70) + k)*tan(data->val * i);
+			checkPozY = data->y1 - k - ((int)data->y1) % 70;
+			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
+				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+		}
+		k += 70;
+	}
+	j = 10;
+	k = 0;
+	while (j--)
+	{
+		i = 0;
+		while (i++ < data->tanAngleNeg && i < 90) {
+			checkPozX = data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i));
+			checkPozY = data->y1 - k - ((int)data->y1) % 70;
+			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
+				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+		}
+		k += 70;
+	}
+
+	j = 10;
+	k = 0;
+	while (j--)
+	{
+		i = -1;
+		while (i++ < data->tanAngleNeg && i < 90) {
+			checkPozY = data->y1 + (((int)data->x1 % 70) + k)*(1/(-tan(data->val * i)));
+			checkPozX = data->x1 - k - ((int)data->x1) % 70;
+			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
+				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
+		}
+		k += 70;
+	}
+	j = 10;
+	k = 0;
+	while (j--)
+	{
+		i = -1;
+		while (i++ < data->tanAnglePoz && i < 90) {
+			checkPozY = data->y1 + (((int)data->x1 % 70) + k)*(-tan(data->val * (90 - i)));
+			checkPozX = data->x1 + k + (70 - ((int)data->x1)) % 70;
+			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630)) {
+				printf("%d, %d\n", checkPozX, checkPozY);
+				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
+			}
+		}
+		k += 70;
+	}
+
+	//printf("%f\n",data->tanAngleNeg);
+/* 	while (j--)
+	{
+		while (i-- < data->tanAngleNeg && i > 0) {
+			checkPozX = data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i));
+			checkPozY = data->y1 - k - ((int)data->y1) % 70;
+			//if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
+				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+		}
+		k += 70;
+	} */
+
+	/* if ( (data->tanAngleNeg == -240) && (data->tanAnglePoz == 0))
+	{
+		data->tanAnglePoz = 120;
+		data->tanAngleNeg = 0;
+	}
+	if ((data->tanAnglePoz == -240) && (data->tanAnglePoz == 0))
+	{
+		data->tanAnglePoz = 0;
+		data->tanAngleNeg = 120;
+	} */
+/* 	k = 0;
+	i,j = 10;
+	while (j--)
+	{
+		i = -1;
 		while (i++ < data->tanAnglePoz)
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*tan(data->val * i), data->y1 - k - ((int)data->y1) % 70, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*tan(data->val * i), data->y1 + k - ((int)data->y1) % 70, 0x00ff00);
 		k += 70;
 	}
 	i,j = 10;
@@ -83,9 +168,9 @@ void makeRay(t_data *data) {
 	{
 		i = 0;
 		while (i++ < data->tanAngleNeg)
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i)), data->y1 - k - ((int)data->y1) % 70, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i)), data->y1 + k - ((int)data->y1) % 70, 0x00ff00);
 		k += 70;
-	}
+	} */
 	// printf("x1: %f, y1: %f, xa1: %f, xb1: %f\n", data->x1, data->y1, tan(data->val * data->angle)*data->x1, tan(data->val * data->angle)*data->y1);
 
 }
@@ -130,13 +215,52 @@ int func(int keypress, void *arg) {
 	if (data->angle <= -360 || data->angle >= 360) {
 		data->angle = 0;
 	}
-	if ( data->tanAngleNeg == 360 || data->tanAngleNeg == -360)
-	{
-	data->tanAngleNeg = 0;
-	}	
-		
-	if ( data->tanAnglePoz == 360 || data->tanAnglePoz == -360)
-		data->tanAnglePoz = 0;
+
+	// if (!(data->angle >= 60 && data->angle <= 210)) {
+	// 	if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// }
+	// if (!(data->angle >= 330 && data->angle <= 120)) {
+	// 	if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// }
+	// if (!(data->angle >= 240 && data->angle <= 30)) {
+	// 	if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// }
+	// if (!(data->angle >= 150 && data->angle <= 300)) {
+	// 	if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// 	else if () {
+
+	// 	}
+	// }
+	
 	makeRay(data);
 	return (0);
 }
@@ -174,10 +298,10 @@ int main() {
 					y++;
 				}
 			}
-			else {
+			/* else {
 				for (int ks = 0; ks < 70; ks++)
 					data.new_img_data[(i * 800 * 70) + (j * 70) + (x + (y * 799)) + ks] = 0xff8000;
-			}
+			} */
 		}
 	}
 	double angle, val, x1, x2, y1, y2;
