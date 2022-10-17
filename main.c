@@ -88,12 +88,12 @@ void makeRay(t_data *data) {
 		}
 		k += 70;
 	}
-/* 	j = 10;
+	j = 10;
 	k = 0;
 	while (j--)
 	{
-		i = 0;
-		while (i++ < data->tanAngleNeg && i < 90) {
+		i = data->secAngle[1];
+		while (i++ < data->secAngle[0] && i < 90) {
 			checkPozX = data->x1 + (((int)data->y1 % 70) + k)*(-tan(data->val * i));
 			checkPozY = data->y1 - k - ((int)data->y1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
@@ -106,17 +106,16 @@ void makeRay(t_data *data) {
 	k = 0;
 	while (j--)
 	{
-		i = -1;
-		while (i++ < data->tanAngleNeg && i < 90) {
+		i = data->secAngle[1];
+		while (i++ < data->secAngle[0] && i < 90) {
 			checkPozY = data->y1 + (((int)data->x1 % 70) + k)*(1/(-tan(data->val * i)));
 			checkPozX = data->x1 - k - ((int)data->x1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
 				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
-			// i += 1;
 		}
 
 		k += 70;
-	} */
+	}
 	j = 10;
 	k = 0;
 	while (j--)
@@ -219,7 +218,6 @@ int func(int keypress, void *arg) {
 	}
 	
 	double checkAngle = abs((int)data->angle % 360);
-	printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
 	if (!(checkAngle > 60 && checkAngle < 210)) {
 		if (checkAngle >= 210 && checkAngle < 330) {
 			data->firstAngle[0] = 0;
@@ -234,21 +232,25 @@ int func(int keypress, void *arg) {
 			data->firstAngle[1] = 90;
 		}
 	}
-/* 	if (!(checkAngle > 330 && checkAngle < 120)) {
+	if (!(checkAngle > 330 && checkAngle < 120)) {
 		if (checkAngle >= 120 && checkAngle < 240) {
-			data->secAngle[0] = 0;
-			data->secAngle[1] = fabs(120 - checkAngle);
+			data->secAngle[0] = 90;
+			if (checkAngle < 210)
+				data->secAngle[1] = fabs(checkAngle - 120 - 90);
+			else
+				data->secAngle[1] = 0;
+			printf("0: %f, 1: %f ----angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
 		}
 		else if (checkAngle >= 240) {
-			data->firstAngle[0] = fabs(240 - checkAngle);
-			data->firstAngle[1] = 90;
-			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
+			data->secAngle[0] = 90 - fabs(checkAngle - 240);
+			data->secAngle[1] = 0;
+			printf("0: %f, 1: %f ----angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
 		}
-		else if (checkAngle <= 60) {
-			data->firstAngle[0] = fabs(30 + checkAngle);
-			data->firstAngle[1] = 90;
+/* 		else if (checkAngle <= 330) {
+			data->secAngle[1] = fabs(30 + checkAngle);
+			data->secAngle[0] = 90;
+		} */
 	}
-	} */
 /* 	if (!(data->angle >= 240 && data->angle <= 30)) {
 		if () {
 
