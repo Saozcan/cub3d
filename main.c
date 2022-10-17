@@ -213,7 +213,7 @@ int func(int keypress, void *arg) {
 	}
 	else if (keypress == 53)
 		exit(1);
-	if (data->angle == 360 || data->angle == 1080) {
+	if (data->angle <= 360 || data->angle >= 1080) {
 		data->angle = 720;
 	}
 
