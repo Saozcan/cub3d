@@ -112,7 +112,9 @@ void makeRay(t_data *data) {
 			checkPozX = data->x1 - k - ((int)data->x1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630))
 				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
+			// i += 1;
 		}
+
 		k += 70;
 	}
 	j = 10;
@@ -121,8 +123,8 @@ void makeRay(t_data *data) {
 	{
 		i = -1;
 		while (i++ < data->tanAnglePoz && i < 90) {
-			checkPozY = data->y1 + (((int)data->x1 % 70) + k)*(-tan(data->val * (90 - i)));
-			checkPozX = data->x1 + k + (70 - ((int)data->x1)) % 70;
+			checkPozY = data->y1 + (70 - ((int)data->x1 % 70) + k)*1/(-tan(data->val * (i)));
+			checkPozX = data->x1 + k + 70 - ((int)data->x1) % 70;
 			if ((checkPozX > 70 && checkPozX < 630) && (checkPozY > 70 && checkPozY < 630)) {
 				printf("%d, %d\n", checkPozX, checkPozY);
 				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0xff0f00);
