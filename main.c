@@ -213,40 +213,43 @@ int func(int keypress, void *arg) {
 	}
 	else if (keypress == 53)
 		exit(1);
-	if (data->angle <= 360 || data->angle >= 1080) {
+
+	if (data->angle == 360 || data->angle == 1080) {
 		data->angle = 720;
 	}
-
+	
 	double checkAngle = abs((int)data->angle % 360);
 	printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
 	if (!(checkAngle > 60 && checkAngle < 210)) {
 		if (checkAngle >= 210 && checkAngle < 330) {
 			data->firstAngle[0] = 0;
 			data->firstAngle[1] = fabs(210 - checkAngle);
-			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
 		}
 		else if (checkAngle >= 330) {
 			data->firstAngle[0] = fabs(330 - checkAngle);
 			data->firstAngle[1] = 90;
-			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
 		}
 		else if (checkAngle <= 60) {
 			data->firstAngle[0] = fabs(30 + checkAngle);
 			data->firstAngle[1] = 90;
 		}
 	}
-/* 	if (!(data->angle >= 330 && data->angle <= 120)) {
-		if () {
-
+/* 	if (!(checkAngle > 330 && checkAngle < 120)) {
+		if (checkAngle >= 120 && checkAngle < 240) {
+			data->secAngle[0] = 0;
+			data->secAngle[1] = fabs(120 - checkAngle);
 		}
-		else if () {
-
+		else if (checkAngle >= 240) {
+			data->firstAngle[0] = fabs(240 - checkAngle);
+			data->firstAngle[1] = 90;
+			printf("%f, %f, angle: %f\n", data->firstAngle[0], data->firstAngle[1], data->angle);
 		}
-		else if () {
-
-		}
+		else if (checkAngle <= 60) {
+			data->firstAngle[0] = fabs(30 + checkAngle);
+			data->firstAngle[1] = 90;
 	}
-	if (!(data->angle >= 240 && data->angle <= 30)) {
+	} */
+/* 	if (!(data->angle >= 240 && data->angle <= 30)) {
 		if () {
 
 		}
@@ -271,6 +274,7 @@ int func(int keypress, void *arg) {
 	
 	makeRay(data);
 	return (0);
+
 }
 
 int main() {
@@ -314,7 +318,7 @@ int main() {
 	}
 	double angle, val, x1, x2, y1, y2;
 	data.val = PI / 180;
-	data.angle = 270;
+	data.angle = 630;
 	data.x1 =  210.187407;
 	data.y1 = 309.354930;
 	data.tanAnglePoz = 60;
