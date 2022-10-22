@@ -77,6 +77,7 @@ int func(int keypress, void *arg) {
 			data->firstAngle[1] = fabs(30 + checkAngle);
 			data->firstAngle[0] = 90;
 		}
+		// printf("f: %f, s: %f angle: %f\n", data->firstAngle[0], data->firstAngle[1], checkAngle);
 
 	}
 	if (!(checkAngle > 330 && checkAngle < 120)) {
@@ -121,9 +122,8 @@ int func(int keypress, void *arg) {
             data->fourthAngle[0] = 90 - fabs(60 - checkAngle);
             data->fourthAngle[1] = 0;
         }
-		//printf("f: %f, s: %f angle: %f\n", data->fourthAngle[0], data->fourthAngle[1], checkAngle);
-
 	}
+
 	makeRay(data);
 	return (0);
 }
