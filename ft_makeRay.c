@@ -59,7 +59,7 @@ void secArea(t_data *data, int *d_idx) {
 	int checkPozX, checkPozY, checkPozX1, checkPozY1;
 
 	i = data->secAngle[0];
-	while (i >= data->secAngle[1])
+	while (i > data->secAngle[1])
 	{
 		k = 0;
 		while (k <= 700) {
@@ -139,7 +139,7 @@ void fourtArea(t_data *data, int *d_idx) {
 	int checkPozX, checkPozY, checkPozX1, checkPozY1;
 
 	i = data->fourthAngle[0];
-	while (i >= data->fourthAngle[1])
+	while (i > data->fourthAngle[1])
 	{
 		k = 0;
 		while (k <= 700) {
@@ -159,15 +159,23 @@ void fourtArea(t_data *data, int *d_idx) {
 			}
 			k += 70;
  		}
-		if (checkPozX1 > checkPozX) {
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
+		double first, sec;
+
+		first = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)));
-		}
-		else if (checkPozX1 < checkPozX){
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
+
+		sec = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
 			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+
+		if (first < sec) {
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			/* data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
+			((data->y1 - checkPozY) * (data->y1 - checkPozY))); */
+		}
+		else if (sec < first){
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
+			/* data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \ */
+			/* ((data->y1 - checkPozY1) * (data->y1 - checkPozY1))); */
 		}
 		i -= 5;
 	}
@@ -212,7 +220,7 @@ void makeRay(t_data *data) {
 	ft_bzero(data->lastDistances, 34);
 
 
-	if (((int)data->angle % 360) >= 60 && ((int)data->angle % 360) <= 330) {
+	if (((int)data->angle % 360) >= 60 && ((int)data->angle % 360) <= 300) {
 		fourtArea(data, &d_idx);
 		thirdArea(data, &d_idx);
 		secArea(data, &d_idx);
@@ -227,7 +235,7 @@ void makeRay(t_data *data) {
 
 	int j = -1;
 	while (++j < 24)
-		printf("%d: %d\n", j, data->lastDistances[j]);
+		printf("%d: %f\n", j, data->lastDistances[j]);
 
 
 

@@ -108,10 +108,11 @@ int l, L;
 	data.distances[2] = calloc(sizeof(int), 34);
 	data.distances[3] = calloc(sizeof(int), 34); */
 
-	data.lastDistances = calloc(sizeof(int), 34);
+	data.lastDistances = calloc(sizeof(float), 34);
 
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.new_img, 0, 0);
-	mlx_hook(data.mlx_win, 2, 0, func, (void *)&data);
+	mlx_key_hook(data.mlx_win, func, (void *)&data);
+	//mlx_hook(data.mlx_win, 2, 0, func, (void *)&data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

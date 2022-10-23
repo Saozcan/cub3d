@@ -29,34 +29,34 @@ int func(int keypress, void *arg) {
 	cx = data->x1 - (5 * cos((data->angle + 90) * data->val));
 	dy = data->y1 + (5 * sin((data->angle + 90) * data->val));
 	dx = data->x1 + (5 * cos((data->angle + 90) * data->val));
-	if (keypress == 123) {
+	if (keypress == 123 || keypress == 65361) {
 		data->tanAnglePoz -= 5;
 		data->tanAngleNeg += 5;
 		data->angle -= 5;
 	}
-	else if (keypress == 124)
+	else if (keypress == 124 || keypress == 65363)
 	{
 		data->tanAnglePoz += 5;
 		data->tanAngleNeg -= 5;
 		data->angle += 5;
 	}
-	else if (keypress == 13 && (wall_check(*data, ax, ay) == 0) /*  && (wall_check(*data, data->x1, data->y1 - 5) == 0) */) {
+	else if ((keypress == 13 || keypress == 119) && (wall_check(*data, ax, ay) == 0) /*  && (wall_check(*data, data->x1, data->y1 - 5) == 0) */) {
 		data->y1 = data->y1 + (5 * sin(data->angle * data->val));
 		data->x1 = data->x1 + (5 * cos(data->angle * data->val));
 	}
-	else if (keypress == 1 && wall_check(*data, bx, by) == 0 /* && (wall_check(*data, data->x1, data->y1 + 5) == 0) */){
+	else if ((keypress == 1 || keypress == 115) && wall_check(*data, bx, by) == 0 /* && (wall_check(*data, data->x1, data->y1 + 5) == 0) */){
 		data->y1 = data->y1 - (5 * sin(data->angle * data->val));
 		data->x1 = data->x1 - (5 * cos(data->angle * data->val));
 	}
-	else if (keypress == 0 && wall_check(*data, cx, cy) == 0 && (wall_check(*data, data->x1  - 5, data->y1) == 0)){
+	else if ((keypress == 0 || keypress == 97) && wall_check(*data, cx, cy) == 0 && (wall_check(*data, data->x1  - 5, data->y1) == 0)){
 		data->y1 = data->y1 - (5 * sin((data->angle + 90) * data->val));
 		data->x1 = data->x1 - (5 * cos((data->angle + 90) * data->val));
 	}
-	else if (keypress == 2 && wall_check(*data, dx, dy) == 0 && (wall_check(*data, data->x1 + 5, data->y1) == 0)){
+	else if ((keypress == 2 || keypress == 100) && wall_check(*data, dx, dy) == 0 && (wall_check(*data, data->x1 + 5, data->y1) == 0)){
 		data->y1 = data->y1 + (5 * sin((data->angle + 90) * data->val));
 		data->x1 = data->x1 + (5 * cos((data->angle + 90) * data->val));
 	}
-	else if (keypress == 53)
+	else if (keypress == 53 || keypress == 65307)
 		exit(1);
 
 	if (data->angle == 360 || data->angle == 1080) {

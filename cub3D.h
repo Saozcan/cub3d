@@ -25,8 +25,7 @@ typedef struct s_data
 	int		*wallLocationsX;
 	int		*wallLocationsY;
 
-	int		**distances;
-	int		*lastDistances;
+	float	*lastDistances;
 }	t_data;
 
 int	wall_check(t_data data, int x, int y);
