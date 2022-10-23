@@ -40,15 +40,20 @@ void firstArea(t_data *data, int *d_idx) {
 			}
 			k += 70;
 		}
-		if (checkPozX < checkPozX1) {
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
+		double first, sec;
+
+		first = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)));
+
+		sec = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
+			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+		if (first < sec) {
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			data->lastDistances[++*d_idx] = first;
 		}
 		else {
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
-			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+			data->lastDistances[++*d_idx] = sec;
 		}
 		i += 5;
 	}
@@ -79,15 +84,20 @@ void secArea(t_data *data, int *d_idx) {
 			}
 			k += 70;
 		}
-		if (checkPozX > checkPozX1) {
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
+		double first, sec;
+
+		first = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)));
+
+		sec = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
+			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+		if (first < sec) {
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			data->lastDistances[++*d_idx] = first;
 		}
 		else {
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
-			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+			data->lastDistances[++*d_idx] = sec;
 		}
 		i -= 5;
 	}	
@@ -119,15 +129,21 @@ void thirdArea(t_data *data, int *d_idx) {
 			}
 			k += 70;
 		}
-		if (checkPozX > checkPozX1) {
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
+		double first, sec;
+
+		first = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)));
+
+		sec = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
+			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+
+		if (first < sec) {
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			data->lastDistances[++*d_idx] = first;
 		}
 		else {
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
-			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
-			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)));
+			data->lastDistances[++*d_idx] = sec;
 		}
 		i += 5;
 	}
@@ -169,14 +185,10 @@ void fourtArea(t_data *data, int *d_idx) {
 
 		if (first < sec) {
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
-			/* data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
-			((data->y1 - checkPozY) * (data->y1 - checkPozY))); */
 			data->lastDistances[++*d_idx] = first;
 		}
 		else if (sec < first){
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
-			/* data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \ */
-			/* ((data->y1 - checkPozY1) * (data->y1 - checkPozY1))); */
 			data->lastDistances[++*d_idx] = sec;
 		}
 		i -= 5;
