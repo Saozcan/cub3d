@@ -4,7 +4,7 @@
 #include "mlx.h"
 
 #define PI 3.14159265
-#define RAYS 0.0625
+#define RAYS 2
 
 
 typedef struct s_data

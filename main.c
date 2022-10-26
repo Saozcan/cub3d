@@ -70,7 +70,7 @@ int main() {
 	data.distances[1] = calloc(sizeof(int), 34);
 	data.distances[2] = calloc(sizeof(int), 34);
 	data.distances[3] = calloc(sizeof(int), 34); */
-	data.lastDistances = calloc(sizeof(int), 960);
+	data.lastDistances = calloc(sizeof(int), 60);
 	data.wall_faces = calloc(sizeof(char), 960 + 1);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.new_img, 0, 0);
 	data.begin =0;
