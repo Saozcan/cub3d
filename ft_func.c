@@ -28,14 +28,10 @@ int func(int keypress, void *arg) {
 	dy = data->y1 + (5 * sin((data->angle + 90) * data->val));
 	dx = data->x1 + (5 * cos((data->angle + 90) * data->val));
 	if (keypress == 123) {
-		data->tanAnglePoz -= 5;
-		data->tanAngleNeg += 5;
 		data->angle -= 5;
 	}
 	else if (keypress == 124)
 	{
-		data->tanAnglePoz += 5;
-		data->tanAngleNeg -= 5;
 		data->angle += 5;
 	}
 	else if (keypress == 13 && (wall_check(*data, ax, ay) == 0)) {
@@ -81,21 +77,21 @@ int func(int keypress, void *arg) {
 		}
 		//printf("f: %f, s: %f angle: %f\n", data->firstAngle[0], data->firstAngle[1], checkAngle);
 	}
-	if ((checkAngle <= 300 && checkAngle >= 150)) {
-		if (checkAngle >= 150 && checkAngle <= 240) {
+	if (!(checkAngle >= 300 && checkAngle <= 150)) {
+		if (checkAngle >= 150 && checkAngle < 240) {
 			data->secAngle[0] = 90;
- 			if (checkAngle < 210)
+			if (checkAngle < 210)
 				data->secAngle[1] = fabs(checkAngle - 150 - 90);
-			else {
-				data->secAngle[0] = 90 - (checkAngle - 210);
-				data->secAngle[1] = 30 - (checkAngle - 210);
+			else{
+				data->secAngle[0] = 90 - fabs(checkAngle - 210);
+				data->secAngle[1] = 30 - fabs(checkAngle - 210);
 			}
 		}
 		else if (checkAngle >= 240) {
 			data->secAngle[0] = 60 - fabs(checkAngle - 240);
 			data->secAngle[1] = 0;
 		}
-		printf("f: %f, s: %f angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
+		// printf("f: %f, s: %f angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
 	}
 	if ((checkAngle <= 210 && checkAngle >= 60)) {
 		if (checkAngle >= 150 && checkAngle <= 210) {

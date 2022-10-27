@@ -23,8 +23,6 @@ void	ft_init_data_game_values(t_data *data)
 	data->angle = 630;
 	data->x1 =  420;
 	data->y1 = 180;
-	data->tanAnglePoz = 60;
-	data->tanAngleNeg = 60;
 	data->firstAngle[1] = 0;
 	data->firstAngle[0] = 0;
 	data->secAngle[1] = 0;
@@ -42,7 +40,6 @@ void	ft_init_data(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx_ptr, 1000, 1000, "377266");
  	data->new_img = mlx_new_image(data->mlx_ptr, 800, 800);
 	data->new_img_data = (int *)mlx_get_data_addr(data->new_img, &data->bits_per_pixel, &data->size_line, &data->endian);
-
 /* 	int x;
 	int y;
 	data->new_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &x, &y);
@@ -53,10 +50,6 @@ void	ft_init_data(t_data *data)
 	data->new_img_data = mlx_get_data_addr(data->new_img, &data->bits_per_pixel, &data->size_line, &data->endian);
 		data->new_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &x, &y);
 	data->new_img_data = mlx_get_data_addr(data->new_img, &data->bits_per_pixel, &data->size_line, &data->endian); */
-
-	data->logo_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &data->x_img, &data->y_img);
-	data->addr = mlx_get_data_addr(data->logo_img, &data->bits_per_pixel, &data->line_length, &data->endian);
-	printf("bits_per_pixel: %d, line_length: %d, endian: %d\n", data->bits_per_pixel, data->line_length, data->endian);
 
 	
 	ft_wall_counter(data);
@@ -69,16 +62,12 @@ int main() {
 	t_data data;
 
 	ft_init_data(&data);
-/* 	data.distances = calloc(sizeof(int), 5);
-	data.distances[0] = calloc(sizeof(int), 34);
-	data.distances[1] = calloc(sizeof(int), 34);
-	data.distances[2] = calloc(sizeof(int), 34);
-	data.distances[3] = calloc(sizeof(int), 34); */
-	data.lastDistances = calloc(sizeof(int), 960);
-	data.wall_faces = calloc(sizeof(char), 960 + 1);
+
+	data.lastDistances = calloc(sizeof(int), TOTALRAYS);
+	data.wall_faces = calloc(sizeof(char), TOTALRAYS + 1);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.new_img, 0, 0);
 	data.begin =0;
-	makeRay(&data);
+	//makeRay(&data);
 	mlx_hook(data.mlx_win, 2, 0, func, (void *)&data);
 	mlx_hook(data.win2, 2, 0, func, (void *)&data);
 	mlx_loop(data.mlx_ptr);
