@@ -4,14 +4,14 @@
 #include "mlx.h"
 
 #define PI 3.14159265
-#define RAYS 2
+#define RAYS 0.0625
 
 
 typedef struct s_data
 {
-	int bits_per_pixel;
+	// int bits_per_pixel;
 	int size_line;
-	int endian;
+	// int endian;
 	void *new_img;
 	int *new_img_data;
 	void *mlx_ptr;
@@ -36,6 +36,15 @@ typedef struct s_data
 	float	*lastDistances;
 	int		begin;
 	double	angle_distance;
+
+	//imgs
+	void	*logo_img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		x_img;
+	int		y_img;
 }	t_data;
 
 int	wall_check(t_data data, int x, int y);
@@ -47,5 +56,9 @@ void	ft_wall_location_create(int *wallLocationX, int *wallLocationY, int i, int 
 void	ft_malloc_allocat(t_data *data);
 void	ft_wall_counter(t_data *data);
 t_data	ft_put_wall(t_data data);
+
+//img
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 
 #endif

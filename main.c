@@ -54,6 +54,10 @@ void	ft_init_data(t_data *data)
 		data->new_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &x, &y);
 	data->new_img_data = mlx_get_data_addr(data->new_img, &data->bits_per_pixel, &data->size_line, &data->endian); */
 
+	data->logo_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &data->x_img, &data->y_img);
+	data->addr = mlx_get_data_addr(data->logo_img, &data->bits_per_pixel, &data->line_length, &data->endian);
+	printf("bits_per_pixel: %d, line_length: %d, endian: %d\n", data->bits_per_pixel, data->line_length, data->endian);
+
 	
 	ft_wall_counter(data);
 	ft_malloc_allocat(data);
@@ -70,7 +74,7 @@ int main() {
 	data.distances[1] = calloc(sizeof(int), 34);
 	data.distances[2] = calloc(sizeof(int), 34);
 	data.distances[3] = calloc(sizeof(int), 34); */
-	data.lastDistances = calloc(sizeof(int), 60);
+	data.lastDistances = calloc(sizeof(int), 960);
 	data.wall_faces = calloc(sizeof(char), 960 + 1);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.new_img, 0, 0);
 	data.begin =0;

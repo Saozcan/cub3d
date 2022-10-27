@@ -41,22 +41,20 @@ void firstArea(t_data *data, int *d_idx) {
 			k += 70;
 		}
 		if (checkPozX < checkPozX1) {
-			if (wall_check(*data, checkPozX, checkPozY))
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX, checkPozY);
-			printf("x: %d y: %d", checkPozX, checkPozY);
-			printf("dis: %f\n", data->lastDistances[*d_idx]);
+			// printf("x: %d y: %d", checkPozX, checkPozY);
+			// printf("dis: %f\n", data->lastDistances[*d_idx]);
 		}
 		else {
-			 if (wall_check(*data, checkPozX1, checkPozY1)) 
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
 			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX1, checkPozY1);
-			printf("x: %d y: %d", checkPozX1, checkPozY1);
-			printf("dis: %f\n", data->lastDistances[*d_idx]);
+			// printf("x: %d y: %d", checkPozX1, checkPozY1);
+			// printf("dis: %f\n", data->lastDistances[*d_idx]);
 		}
 		i += RAYS;
 		data->angle_distance -= RAYS;
@@ -89,22 +87,21 @@ void secArea(t_data *data, int *d_idx) {
 			k += 70;
 		}
 		if (checkPozX > checkPozX1) {
-			if (wall_check(*data, checkPozX, checkPozY))
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX, checkPozY);
-			printf("x: %d y: %d", checkPozX, checkPozY);
-			printf("dis: %f\n", data->lastDistances[*d_idx]);
+			// printf("x: %d y: %d", checkPozX, checkPozY);
+			// printf("dis: %f\n", data->lastDistances[*d_idx]);
 		}
 		else {
-			if (wall_check(*data, checkPozX1, checkPozY1))
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
+
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
 			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX1, checkPozY1);
-			printf("x: %d y:%d ", checkPozX1, checkPozY1);
-			printf("dis: %f\n", data->lastDistances[*d_idx]);
+			// printf("x: %d y:%d ", checkPozX1, checkPozY1);
+			// printf("dis: %f\n", data->lastDistances[*d_idx]);
 		}
 		i -= RAYS;
 		data->angle_distance -= RAYS;
@@ -138,14 +135,14 @@ void thirdArea(t_data *data, int *d_idx) {
 			k += 70;
 		}
 		if (checkPozX > checkPozX1) {
-			//mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX, checkPozY);
 
 		}
 		else {
-			//mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
 			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX1, checkPozY1);
@@ -182,14 +179,14 @@ void fourtArea(t_data *data, int *d_idx) {
 			k += 70;
  		}
 		if (checkPozX1 > checkPozX) {
-			//mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX, checkPozY, 0x00ff00);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX) * (data->x1 - checkPozX)) + \
 			((data->y1 - checkPozY) * (data->y1 - checkPozY)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX, checkPozY);
 
 		}
 		else if (checkPozX1 < checkPozX){
-			//mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, checkPozX1, checkPozY1, 0xff0000);
 			data->lastDistances[++*d_idx] = sqrt(((data->x1 - checkPozX1) * (data->x1 - checkPozX1)) + \
 			((data->y1 - checkPozY1) * (data->y1 - checkPozY1)))*cos(data->val * (data->angle_distance));
 			data->wall_faces[*d_idx] = wall_face(*data, checkPozX1, checkPozY1);
@@ -235,6 +232,7 @@ void makeRay(t_data *data) {
 		y2 = data->y1 + (i * sin(data->val * (data->angle)));
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
+
 
 	if (((int)data->angle % 360) > 300 && ((int)data->angle % 360) < 330){ 
 		//printf("3.koşul\n");
@@ -327,7 +325,7 @@ void makeRay(t_data *data) {
 	int l = 0;
 	double angle = 30;
 	if (data->begin > 0)
-		while (l < 60)
+		while (l < 960)
 		{
 			if (data->lastDistances[l] < 1)
 				data->lastDistances[l] =1;
@@ -341,10 +339,10 @@ void makeRay(t_data *data) {
 					mlx_pixel_put(data->mlx_ptr, data->win2, l, begining_y, 0xfffffff);
 				else
 					mlx_pixel_put(data->mlx_ptr, data->win2, l, begining_y, 0xff00000);
-				begining_y += 1;
-				k+= 1;
+				begining_y += 5;
+				k+= 5;
 			}
-			l += 1;
+			l += 5;
 			angle -= RAYS;
 		}
 		data->begin++;

@@ -82,17 +82,20 @@ int func(int keypress, void *arg) {
 		//printf("f: %f, s: %f angle: %f\n", data->firstAngle[0], data->firstAngle[1], checkAngle);
 	}
 	if ((checkAngle <= 300 && checkAngle >= 150)) {
-		if (checkAngle >= 240 && checkAngle <= 300) {
+		if (checkAngle >= 150 && checkAngle <= 240) {
+			data->secAngle[0] = 90;
+ 			if (checkAngle < 210)
+				data->secAngle[1] = fabs(checkAngle - 150 - 90);
+			else {
+				data->secAngle[0] = 90 - (checkAngle - 210);
+				data->secAngle[1] = 30 - (checkAngle - 210);
+			}
+		}
+		else if (checkAngle >= 240) {
+			data->secAngle[0] = 60 - fabs(checkAngle - 240);
 			data->secAngle[1] = 0;
-			if (checkAngle <= 300)
-				data->secAngle[0] = fabs(checkAngle - 300);
 		}
-		else if (checkAngle < 240) {
-			data->secAngle[1] = fabs(checkAngle - 240);
-			if (checkAngle >= 210)
-				data->secAngle[0] = 60 + fabs(checkAngle - 240);
-		}
-		// printf("f: %f, s: %f angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
+		printf("f: %f, s: %f angle: %f\n", data->secAngle[0], data->secAngle[1], checkAngle);
 	}
 	if ((checkAngle <= 210 && checkAngle >= 60)) {
 		if (checkAngle >= 150 && checkAngle <= 210) {
