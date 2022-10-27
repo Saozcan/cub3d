@@ -40,7 +40,7 @@ t_data	ft_put_wall(t_data data)
 						x = 0;
 						while (x <= 70) 
 						{
-							data.new_img_data[(i * 800 * 70) + (j * 70) + (x + (y * 800))] = 5353205;
+							(data.new_img_data[(i * 800 * 70) + (j * 70) + (x + (y * 800))]) = 5353205;
 							x++;
 						}
 						y++;

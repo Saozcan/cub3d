@@ -28,14 +28,10 @@ int func(int keypress, void *arg) {
 	dy = data->y1 + (5 * sin((data->angle + 90) * data->val));
 	dx = data->x1 + (5 * cos((data->angle + 90) * data->val));
 	if (keypress == 123) {
-		data->tanAnglePoz -= 5;
-		data->tanAngleNeg += 5;
 		data->angle -= 5;
 	}
 	else if (keypress == 124)
 	{
-		data->tanAnglePoz += 5;
-		data->tanAngleNeg -= 5;
 		data->angle += 5;
 	}
 	else if (keypress == 13 && (wall_check(*data, ax, ay) == 0)) {

@@ -8,7 +8,7 @@ char	ft_pozitionCheck(t_data *data, int l) {
 	float distanceLeft = 0, distanceRight = 0;
 
 
-	printf("idx--> %d\n", l);
+	// printf("idx--> %d\n", l);
 
 
 	i = 1;
@@ -24,15 +24,15 @@ char	ft_pozitionCheck(t_data *data, int l) {
 		distanceLeft = fabs(data->lastDistances[l] - data->lastDistances[l - j]);
 	}
 
-	printf("left: %d\n", i);
-	printf("Right: %d\n", j);
+	// printf("left: %d\n", i);
+	// printf("Right: %d\n", j);
 
 	if (l - j >= 0 && distanceLeft < distanceRight) {
-		printf("1--> %d\n", data->wall_faces[l - j]);
+		// printf("1--> %d\n", data->wall_faces[l - j]);
 		return (data->wall_faces[l - j]);
 	}
 	else if (l + i <= TOTALRAYS) {
-		printf("2--> %d\n", data->wall_faces[l + i]);
+		// printf("2--> %d\n", data->wall_faces[l + i]);
 		return (data->wall_faces[l + i]);
 	}
 	return (0);

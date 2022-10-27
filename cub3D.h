@@ -21,8 +21,6 @@ typedef struct s_data
 	double val;
 	double x1;
 	double y1;
-	double tanAnglePoz;
-	double tanAngleNeg;
 	double firstAngle[2];
 	double secAngle[2];
 	double thirdAngle[2];
@@ -49,6 +47,7 @@ void	ft_malloc_allocat(t_data *data);
 void	ft_wall_counter(t_data *data);
 t_data	ft_put_wall(t_data data);
 char	ft_pozitionCheck(t_data *data, int l);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 
 #endif

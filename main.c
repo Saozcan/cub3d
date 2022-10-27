@@ -23,8 +23,6 @@ void	ft_init_data_game_values(t_data *data)
 	data->angle = 630;
 	data->x1 =  420;
 	data->y1 = 180;
-	data->tanAnglePoz = 60;
-	data->tanAngleNeg = 60;
 	data->firstAngle[1] = 0;
 	data->firstAngle[0] = 0;
 	data->secAngle[1] = 0;
@@ -42,7 +40,6 @@ void	ft_init_data(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx_ptr, 1000, 1000, "377266");
  	data->new_img = mlx_new_image(data->mlx_ptr, 800, 800);
 	data->new_img_data = (int *)mlx_get_data_addr(data->new_img, &data->bits_per_pixel, &data->size_line, &data->endian);
-
 /* 	int x;
 	int y;
 	data->new_img = mlx_xpm_file_to_image(data->mlx_ptr, "logo.xpm", &x, &y);

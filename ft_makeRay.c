@@ -239,8 +239,8 @@ void makeRay(t_data *data) {
 	int d_idx = -1;
 
 	data->angle_distance = 30;
-
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->new_img, 0, 0);
+
 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, data->x1, data->y1, 0xff0000);
 	i = 0;
 	while (++i < 500) {
@@ -252,23 +252,24 @@ void makeRay(t_data *data) {
 		tmp = y2 - (int)y2;
 		if (tmp > (double)0.5)
 			y2 += 1;
+		// my_mlx_pixel_put(data, x2, y2, 0xff0000);
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
 	i = 0;
 	while (++i < 500) {
 		x2 = data->x1 + (i * cos(data->val * (data->angle + 30)));
 		y2 = data->y1 + (i * sin(data->val * (data->angle + 30)));
+		// my_mlx_pixel_put(data, x2, y2, 0xff0000);
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
 	i = 0;
 	while (++i < 100) {
 		x2 = data->x1 + (i * cos(data->val * (data->angle)));
 		y2 = data->y1 + (i * sin(data->val * (data->angle)));
+		// my_mlx_pixel_put(data, x2, y2, 0xff0000);
 		mlx_pixel_put(data->mlx_ptr, data->mlx_win, x2, y2, 0xff0000);
 	}
-
 	ft_bzero(data->wall_faces, TOTALRAYS);
-
 	if (((int)data->angle % 360) > 300 && ((int)data->angle % 360) < 330){ 
 		secArea(data, &d_idx);
 		firstArea(data, &d_idx);
