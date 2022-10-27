@@ -14,12 +14,12 @@ char	ft_pozitionCheck(t_data *data, int l) {
 	i = 1;
 	j = 1;
 	if ((l + i) < TOTALRAYS) {
-		while ((l + i) < TOTALRAYS && data->wall_faces[l + i] == 0)
+		while ((l + i) < TOTALRAYS - 1 && data->wall_faces[l + i] == 0)
 			i++;
 		distanceRight = fabs(data->lastDistances[l] - data->lastDistances[l + i]);
 	}
 	if (l - j > 1) {
-		while (l - j > 1 && data->wall_faces[l - j] == 0)
+		while (l - j > 0 && data->wall_faces[l - j] == 0)
 			j++;
 		distanceLeft = fabs(data->lastDistances[l] - data->lastDistances[l - j]);
 	}
